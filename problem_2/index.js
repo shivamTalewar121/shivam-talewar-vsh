@@ -41,3 +41,11 @@ function findSpecificEndChar(family, char){
     console.log(filteredArray)
 }
 findSpecificEndChar(family,"nny")
+
+function findAllNames(family){
+    const allNames = family.map(user=>{
+        console.log(user.name)
+    })
+}
+findAllNames(family)
+
