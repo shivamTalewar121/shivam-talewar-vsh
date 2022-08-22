@@ -48,6 +48,24 @@ const persons = [
             }
 
         ]
+    },
+    {
+        name: "Shivam",
+        animals: [
+            {
+                species: "cat",
+                name: "Snoopy",
+                age: 15
+            },
+            {
+                species: "turtle",
+                name: "cappy",
+                age: 15
+            },
+            {
+                species: "dog"
+            }
+        ]
     }
 ];
 
@@ -64,9 +82,39 @@ function animalsName(persons) {
         let all = person.animals;
         all.filter(animal => {
             allAnimals.push(animal.name)
-            console.log("animals name=>",animal.name)
+            console.log("animals name=>", animal.name)
         })
     })
     console.log(allAnimals)
 }
 animalsName(persons)
+
+function countOfAnimals(persons) {
+    let count = 0;
+    persons.map(user => {
+        if (user.animals !== undefined) {
+            user.animals.map(animal => {
+                if (animal !== undefined) {
+                    count++
+                }
+            })
+        }
+    })
+    console.log(count)
+}
+countOfAnimals(persons)
+
+
+function dogPerson(persons) {
+    persons.map((person, idx) => {
+        let animal = person.animals
+        let name = person.name
+        animal.map((user, idx) => {
+            if (user.species == 'dog') {
+                console.log(name)
+            }
+        })
+    })
+}
+dogPerson(persons)
+
