@@ -18,7 +18,37 @@ const user = [
         website: "dd.net",
         password: "Dean_hashed_password",
         ages: 23
-    }
+    },
+    {
+        id: 4,
+        name: "Nishu Kash",
+        username: "nk.4",
+        email: "nk4@google.com",
+        phone: "1-212-12323-212",
+        website: "nk.net",
+        password: "nishuk121212",
+        ages: 26
+    },
+    {
+        id: 5,
+        name: "Taru Nag",
+        username: "tn.4",
+        email: "tn5@google.com",
+        phone: "1-542-1221-1212",
+        website: "tn.net",
+        password: "tarunag1231",
+        ages: 20
+    },
+    {
+        id: 6,
+        name: "Trisha Madan",
+        username: "tm.66",
+        email: "tmk12@google.com",
+        phone: "1-123-2121-2155",
+        website: "Trish.net",
+        password: "trishaMadhu",
+        ages: 25
+    },
 ]
 
 const newUsers = [
@@ -49,8 +79,6 @@ function addLast(users, temp) {
     console.log(temp);
 }
 
-addLast(user);
-
 function addFirst(users, temp) {
     temp = [...newUsers, ...users];
     console.log(temp);
@@ -64,21 +92,65 @@ function display(users) {
 
 function findNameEquals(users) {
     users.filter(user => {
-        if(user.username === "demon"){
+        if (user.username === "demon") {
             console.log(user.username);
         }
     })
 }
 
-function findSpecificStartChar(users, )
+function findSpecificStartChar(users, char) {
+    let found = [];
+    users.filter(user => {
+        if (user.name.startsWith(char)) {
+            // console.log(user.name);
+            let obj = { name: user.name, age: user.ages }
+            found.push(obj);
+        }
+    })
+    return found;
+}
 
-console.log("Adding at last not mutating the original array")
-addLast(user);
+function findSumAges(users) {
+    let sum = 0;
+    users.map(d => {
+        sum += d.ages;
+    })
+    console.log(sum)
+}
 
-console.log("Adding at first not mutating the original array")
-addFirst(user);
+function findAll(users) {
+    users.map(d => {
+        console.log(d.name + " " + d.ages);
+    })
+}
 
-console.log("display id, name and username")
-display(user)
+function sumAgesStartingWithChar(users, char) {
+    let foundNames = findSpecificStartChar(users, char);
+    // console.log(foundNames);
+    let sumAges = foundNames.reduce((acc, curr) => {
+        acc += curr.age;
+        return acc;
+    }, 0)
+    console.log(sumAges);
+}
 
-findNameEquals(user);
+function Sorting(users, order) {
+    if(order === "ASC") {
+        console.log(users.sort());
+    } else if(order === "DESC") {
+        console.log(users.reverse())
+    } else {
+        console.log("Enter valid order ASC/DESC");
+    }
+}
+
+function deleteRecord(users, index) {
+    users.splice(index, 1);
+    console.log(users);
+}
+
+function insertRecord(users, temp, index) {
+const userLog = users.splice(index,0,temp);
+console.log(users)
+}
+insertRecord(user,{name: 'Shivam', age: 20, email: "shivam@xyz.com"},1)
