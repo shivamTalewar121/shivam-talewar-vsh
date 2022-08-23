@@ -240,7 +240,7 @@ function ownerOfThree(persons) {
     persons.map(person => {
         if (person.animals.length >= 3) {
             currentPerson = person.name
-            person.animals.map(animal => {
+            person.animals.forEach(animal => {
                 if (animal.species === 'dog') {
                     hasDog = true
                 }
@@ -256,4 +256,141 @@ function ownerOfThree(persons) {
             console.log(currentPerson)
     })
 }
-ownerOfThree(persons)
+// ownerOfThree(persons)
+
+function dogSnoopy(persons) {
+    persons.map(person => {
+        if (person.animals !== undefined) {
+            person.animals.map(animal => {
+                if (animal.species === "dog") {
+                    console.log("list of dogs", animal)
+                    if (animal.name === "Snoopy") {
+                        console.log("dog with name Snoopy", animal)
+                    }
+                }
+            })
+        }
+    })
+}
+// dogSnoopy(persons)
+
+
+
+function ascAndDscOfOwner(persons) {
+    let listOfPersons = []
+    persons.map(person => {
+        listOfPersons.push(person.name)
+    })
+    console.log("ascending order=>", listOfPersons.sort())
+    console.log("descending order=>", listOfPersons.reverse())
+}
+// ascAndDscOfOwner(persons)
+
+
+
+function dogsWithS(persons) {
+    persons.map(person => {
+        if (person.animals !== undefined) {
+            person.animals.map((animal, idx) => {
+                if (animal.species === 'dog') {
+                    if (animal.name.startsWith('S')) {
+                        console.log(animal)
+                    }
+                }
+            })
+        }
+    })
+}
+// dogsWithS(persons)
+
+
+
+function avgOfAgeOfAllSpecies(persons) {
+    let ageArray = []
+    persons.map(person => {
+        if (person.animals !== undefined) {
+            person.animals.map(animal => {
+                ageArray.push(animal.age)
+            })
+        }
+    })
+    let totalAge = ageArray.reduce((acc, val) => acc += val, 0)
+    let length = ageArray.length
+    let avgOfAllAge = totalAge / length;
+    console.log(avgOfAllAge)
+}
+// avgOfAgeOfAllSpecies(persons)
+
+
+
+function sumOfAllAges(persons) {
+    let ageArray = []
+    persons.map(person => {
+        if (person.animals !== undefined) {
+            person.animals.map(animal => {
+                ageArray.push(animal.age)
+            })
+        }
+    })
+    let totalAge = ageArray.reduce((acc, val) => acc += val, 0)
+    console.log("sum of all species age", totalAge)
+}
+// sumOfAllAges(persons)
+
+
+
+function sumOfDogsAge(persons) {
+    let dogAge = []
+    persons.map(person => {
+        person.animals.map(animal => {
+            if (animal.species === "dog") {
+                dogAge.push(animal.age)
+            }
+        })
+    })
+    console.log(dogAge)
+    let totalDogsAge = dogAge.reduce((acc, val) => acc += val, 0)
+    console.log("sum of ages of all dogs", totalDogsAge)
+    let length = dogAge.length
+    let avgOfAge = totalDogsAge / length;
+    console.log("average of all dogs age is", avgOfAge.toFixed(2))
+}
+// sumOfDogsAge(persons)
+
+
+
+
+function sumOfTurtlesAge(persons) {
+    let turtleAge = []
+    persons.map(person => {
+        person.animals.map(animal => {
+            if (animal.species === "turtle") {
+                turtleAge.push(animal.age)
+            }
+        })
+    })
+    console.log(turtleAge)
+    let totalTurtlesAge = turtleAge.reduce((acc, val) => acc += val, 0)
+    console.log("sum of ages of all turtles", totalTurtlesAge)
+    let length = turtleAge.length
+    let avgOfAge = totalTurtlesAge / length;
+    console.log("average of all turtles age is", avgOfAge.toFixed(2))
+}
+// sumOfTurtlesAge(persons)
+
+
+
+function sortAnimals(persons) {
+    let allAnimalSpecies = [];
+    let allNamesOfAnimals = []
+    persons.map(person => {
+        person.animals.map(animal => {
+            allAnimalSpecies.push(animal.species);
+            allNamesOfAnimals.push(animal.name)
+        })
+    })
+    console.log(allAnimalSpecies)
+    console.log(allNamesOfAnimals.sort())
+
+}
+sortAnimals(persons)
