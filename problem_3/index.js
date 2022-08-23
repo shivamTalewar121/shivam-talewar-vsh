@@ -59,7 +59,7 @@ const persons = [
             },
             {
                 species: "turtle",
-                name: "cappy",
+                name: "cap",
                 age: 15
             },
             {
@@ -140,4 +140,46 @@ function dogAndTurtlePerson(persons) {
     })
 }
 
-dogAndTurtlePerson(persons)
+//dogAndTurtlePerson(persons)
+
+function hasDog(persons) {
+    let arrayDog = []
+    persons.map(person => {
+        let haveDog = false
+        if (person.animals !== undefined) {
+            person.animals.map(animal => {
+                if (animal.species === "dog") {
+                    haveDog = true
+                }
+            })
+            arrayDog.push(haveDog)
+        }
+    })
+    if (arrayDog.includes(false)) {
+        console.log("not all have dogs")
+    } else {
+        console.log("all have dogs")
+    }
+}
+
+// hasDog(persons)
+
+function hasTurtle(persons) {
+    let turtleArray = []
+    let haveTurtle = false
+    persons.map(person => {
+        if (person.animals !== undefined) {
+            person.animals.map(animal => {
+                if (animal.species === "turtle") {
+                    haveTurtle = true
+                    if (haveTurtle === true) {
+                        turtleArray.push(animal.name)
+                    }
+                }
+            })
+        }
+    })
+    console.log(turtleArray)
+}
+
+hasTurtle(persons)
