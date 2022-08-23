@@ -74,7 +74,7 @@ function personNames(persons) {
         console.log(person.name)
     })
 }
-personNames(persons)
+// personNames(persons)
 
 function animalsName(persons) {
     const allAnimals = []
@@ -87,7 +87,7 @@ function animalsName(persons) {
     })
     console.log(allAnimals)
 }
-animalsName(persons)
+// animalsName(persons)
 
 function countOfAnimals(persons) {
     let count = 0;
@@ -102,7 +102,7 @@ function countOfAnimals(persons) {
     })
     console.log(count)
 }
-countOfAnimals(persons)
+// countOfAnimals(persons)
 
 
 function dogPerson(persons) {
@@ -116,5 +116,28 @@ function dogPerson(persons) {
         })
     })
 }
-dogPerson(persons)
+// dogPerson(persons)
 
+
+function dogAndTurtlePerson(persons) {
+    let currentPerson = ""
+    persons.map(person => {
+        currentPerson = person.name;
+        let hasDog = false;
+        let hasTurtle = false;
+        if (person.animals !== undefined) {
+            person.animals.map(animal => {
+                if (animal.species === "dog") {
+                    hasDog = true;
+                } if (animal.species === "turtle") {
+                    hasTurtle = true;
+                }
+                if (hasDog && hasTurtle) {
+                    console.log(`${currentPerson} has both dog and turtle`)
+                }
+            })
+        }
+    })
+}
+
+dogAndTurtlePerson(persons)
