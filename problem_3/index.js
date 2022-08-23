@@ -63,7 +63,9 @@ const persons = [
                 age: 15
             },
             {
-                species: "dog"
+                species: "turtle",
+                name: "sparky",
+                age: 10
             }
         ]
     }
@@ -182,4 +184,76 @@ function hasTurtle(persons) {
     console.log(turtleArray)
 }
 
-hasTurtle(persons)
+// hasTurtle(persons)
+
+function totalCountOfAnimals(persons) {
+    persons.map((person, idx) => {
+        console.log(persons[idx].name, persons[idx].animals.length)
+    })
+}
+
+// totalCountOfAnimals(persons)
+
+
+function listOfAllAnimals(persons) {
+    persons.map(person => {
+        person.animals.map(animal => {
+            console.log(animal)
+        })
+    })
+}
+// listOfAllAnimals(persons)
+
+function listOfDogs(persons) {
+    let allDogs = []
+    persons.map(person => {
+        person.animals.map(animal => {
+            if (animal.species === "dog") {
+                allDogs.push({ species: animal.species, name: animal.name, age: animal.age })
+            }
+        })
+    })
+    console.log(...allDogs)
+}
+// listOfDogs(persons)
+
+function countOfDogs(persons) {
+    let count = 0
+    persons.filter(person => {
+        if (person.animals !== undefined) {
+            person.animals.map(animal => {
+                if (animal.species === "dog") {
+                    count++
+                }
+            })
+        }
+    })
+    console.log(`persons array have ${count} dogs`)
+}
+// countOfDogs(persons)
+
+function ownerOfThree(persons) {
+    let currentPerson = "";
+    let hasDog = false;
+    let hasTurtle = false;
+    let hasCat = false;
+    persons.map(person => {
+        if (person.animals.length >= 3) {
+            currentPerson = person.name
+            person.animals.map(animal => {
+                if (animal.species === 'dog') {
+                    hasDog = true
+                }
+                if (animal.species === 'turtle') {
+                    hasTurtle = true;
+                }
+                if (animal.species === 'cat') {
+                    hasCat = true;
+                }
+            })
+        }
+        if (hasDog && hasTurtle && hasCat)
+            console.log(currentPerson)
+    })
+}
+ownerOfThree(persons)
