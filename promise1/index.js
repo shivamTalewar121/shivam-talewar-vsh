@@ -249,9 +249,70 @@ function findNameAges(users, char) {
     })
 }
 
-findNameAges(users, "B").then(res => console.log(res)).catch(error => error)
+// findNameAges(users, "B").then(res => console.log(res)).catch(error => error)
 
 
 
 //Question 9
 
+// function sortingData(usersAr, char) {
+//     let order
+//     return new Promise((resolve, reject) => {
+//         if (usersAr !== undefined) {
+//             if (char == "ASC") {
+//                 order = usersAr.map(user => {
+//                     return user.name.toLowerCase()
+//                 })
+//                 order = order.sort()
+//                 resolve(order)
+//             }
+//             else if (char == "DSC") {
+//                 order = usersAr.map(user => {
+//                     return user.name.toLowerCase()
+//                 })
+//                 resolve(order.reverse())
+
+//             }
+//             else {
+//                 reject("NO RECORD")
+//             }
+//         }
+//     })
+// }
+
+function sortingData(usersAr, order) {
+    return new Promise((res, rej) => {
+        if (usersAr !== undefined) {
+            if (order.toUpperCase() === "ASC") {
+                res(usersAr.sort((a, b) => {
+                    let fa = a.name.toLowerCase(),
+                        fb = b.name.toLowerCase();
+                    if (fa < fb) {
+                        return -1;
+                    }
+                    if (fa > fb) {
+                        return 1;
+                    }
+                    return 0;
+                }))
+            } else if (order.toUpperCase() === "DSC") {
+                res(usersAr.sort((a, b) => {
+                    let fa = a.name.toLowerCase(),
+                        fb = b.name.toLowerCase();
+                    if (fa > fb) {
+                        return -1;
+                    }
+                    if (fa < fb) {
+                        return 1;
+                    }
+                    return 0;
+                }))
+
+            } else {
+                rej("Check Argument")
+            }
+        }
+    })
+}
+
+sortingData(users, "asc").then(result => console.log(result)).catch(error => console.log(error))
