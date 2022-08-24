@@ -237,32 +237,21 @@ function findAllUsers(users) {
 //Question 8
 
 function findNameAges(users, char) {
-    let array1;
-    let totalAge
     return new Promise((resolve, reject) => {
         if (users !== undefined) {
-            addLast(users, temp).then(res => {
-                array1 = res
-            }).then(result => {
-                displayName(array1).then(resolve => {
-                    console.log("output of question 1", resolve)
-                }).catch(error => console.log(error))
-            })
-                .catch(error => console.log(error))
-
-            array1 = users.filter(user => {
-                if (user.name.toLowerCase().includes(char.toLowerCase())) {
-                    return user.ages
-                }
-            })
-            if (array1.length === 0) {
-                reject("NO RECORDS FOUND")
-            } else {
-                totalAge = array1.reduce((acc, val) => acc += val.ages, 0)
-                resolve(`total of all ages whose name starts with B is ${totalAge}`)
-            }
+            resolve(
+                findSpecificStartChar(users, char).then(res => findSumAges(res).then(result => {
+                    console.log(`the total of age whose name starts with B is ${result}`)
+                }).catch(error => console.log(error))).catch(error => console.log(error))
+            )
         }
+        reject("NO RECORDS FOUND")
     })
 }
 
-findNameAges(users, "B").then(res => console.log(res)).catch(error => console.log(error))
+findNameAges(users, "B").then(res => console.log(res)).catch(error => error)
+
+
+
+//Question 9
+
