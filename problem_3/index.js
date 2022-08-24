@@ -385,11 +385,11 @@ function sortAnimals(persons) {
     let allNamesOfAnimals = []
     persons.map(person => {
         person.animals.map(animal => {
-            allAnimalSpecies.push(animal.species);
-            allNamesOfAnimals.push(animal.name)
+            allAnimalSpecies.push(animal.species.toLowerCase());
+            allNamesOfAnimals.push(animal.name.toLowerCase())
         })
     })
-    console.log(allAnimalSpecies)
+    console.log(allAnimalSpecies.sort())
     console.log(allNamesOfAnimals.sort())
 
 }
