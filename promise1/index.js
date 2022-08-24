@@ -19,6 +19,16 @@ const users = [
         website: "dd.net",
         password: "Dean_hashed_password",
         ages: 23
+    },
+    {
+        id: 3,
+        name: "Demon John",
+        username: "dd.1",
+        email: "deno@google.com",
+        phone: "1-123-543-1857 123212",
+        website: "dd.net",
+        password: "Dean_hashed_password",
+        ages: 23
     }
 ];
 
@@ -115,4 +125,88 @@ let firstUsers = [
 
 // Question 3
 
+function displayName(users) {
+    return new Promise((resolve, reject) => {
+        if (users !== undefined || users !== []) {
+            let list = users.map(user => {
+                return { name: user.name, id: user.id, username: user.username }
+            })
+            resolve(list)
+        } else {
+            reject(() => console.log("no user is present"))
+        }
+    })
+}
 
+// displayName(users).then(result => {
+//     console.log(...result)
+// }).catch(error => console.log(error))
+
+
+
+//Question 4
+
+function findNameEquals(users) {
+    let list;
+    return new Promise((resolve, reject) => {
+        if (users !== undefined) {
+            list = users.filter((user) => user.name.toLowerCase().includes('demon'))
+            if (list.length === 0) {
+                reject("NO RECORDS FOUND")
+            } else {
+                resolve(list)
+            }
+        } else {
+            reject("NO RECORDS FOUND")
+        }
+    })
+}
+
+// findNameEquals(users).then(result => console.log(result)).catch(error => console.log(error))
+
+
+
+//Question 5
+
+function findSpecificStartChar(users, char) {
+    let user
+    return new Promise((resolve, reject) => {
+        if (users !== undefined) {
+            user = users.filter(result => result.name.toLowerCase().startsWith(char.toLowerCase()))
+            if (user.length === 0) {
+                reject("NO RECORDS FOUND")
+            } else {
+                resolve(user)
+            }
+        } else {
+            reject("NO RECORDS FOUND")
+        }
+    })
+}
+
+// findSpecificStartChar(users, "D").then((result) => {
+//     console.log(result)
+// }).catch(error => console.log(error))
+
+
+
+
+//Question 6
+
+function findSumAges(users) {
+    let totalAge
+    return new Promise((resolve, reject) => {
+        if (users !== undefined) {
+            totalAge = users.filter(user => {
+                return user.ages !== undefined && user.ages > 0
+            }).reduce((acc, val) => acc += val.ages, 0)
+        }
+        if (totalAge !== 0 && totalAge > 0) {
+            resolve(totalAge)
+        } else {
+            reject("NO RECORD FOUND")
+        }
+    })
+}
+
+findSumAges(users).then(result => console.log(`Total of all the ages of persons in the record is ${result}`)).catch(error => console.log(error))
