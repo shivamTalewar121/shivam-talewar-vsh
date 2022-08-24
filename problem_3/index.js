@@ -58,7 +58,7 @@ const persons = [
                 age: 15
             },
             {
-                species: "turtle",
+                species: "dog",
                 name: "cap",
                 age: 15
             },
@@ -71,12 +71,19 @@ const persons = [
     }
 ];
 
+
+
+
+
 function personNames(persons) {
     const names = persons.filter(person => {
         console.log(person.name)
     })
 }
 // personNames(persons)
+
+
+
 
 function animalsName(persons) {
     const allAnimals = []
@@ -90,6 +97,9 @@ function animalsName(persons) {
     console.log(allAnimals)
 }
 // animalsName(persons)
+
+
+
 
 function countOfAnimals(persons) {
     let count = 0;
@@ -105,6 +115,8 @@ function countOfAnimals(persons) {
     console.log(count)
 }
 // countOfAnimals(persons)
+
+
 
 
 function dogPerson(persons) {
@@ -142,7 +154,11 @@ function dogAndTurtlePerson(persons) {
     })
 }
 
-//dogAndTurtlePerson(persons)
+// dogAndTurtlePerson(persons)
+
+
+
+
 
 function hasDog(persons) {
     let arrayDog = []
@@ -166,6 +182,9 @@ function hasDog(persons) {
 
 // hasDog(persons)
 
+
+
+
 function hasTurtle(persons) {
     let turtleArray = []
     let haveTurtle = false
@@ -186,6 +205,9 @@ function hasTurtle(persons) {
 
 // hasTurtle(persons)
 
+
+
+
 function totalCountOfAnimals(persons) {
     persons.map((person, idx) => {
         console.log(persons[idx].name, persons[idx].animals.length)
@@ -204,6 +226,8 @@ function listOfAllAnimals(persons) {
 }
 // listOfAllAnimals(persons)
 
+
+
 function listOfDogs(persons) {
     let allDogs = []
     persons.map(person => {
@@ -216,6 +240,8 @@ function listOfDogs(persons) {
     console.log(...allDogs)
 }
 // listOfDogs(persons)
+
+
 
 function countOfDogs(persons) {
     let count = 0
@@ -232,31 +258,39 @@ function countOfDogs(persons) {
 }
 // countOfDogs(persons)
 
+
+
 function ownerOfThree(persons) {
     let currentPerson = "";
-    let hasDog = false;
-    let hasTurtle = false;
-    let hasCat = false;
     persons.map(person => {
-        if (person.animals.length >= 3) {
-            currentPerson = person.name
-            person.animals.forEach(animal => {
-                if (animal.species === 'dog') {
-                    hasDog = true
-                }
-                if (animal.species === 'turtle') {
-                    hasTurtle = true;
-                }
-                if (animal.species === 'cat') {
-                    hasCat = true;
-                }
-            })
+        currentPerson = person.name
+        let hasDog = false;
+        let hasTurtle = false;
+        let hasCat = false;
+        if (person.animals !== undefined) {
+            if (persons.length >= 3) {
+                person.animals.forEach(animal => {
+                    if (animal.species === 'dog') {
+                        hasDog = true
+                    }
+                    if (animal.species === 'turtle') {
+                        hasTurtle = true;
+                    }
+                    if (animal.species === 'cat') {
+                        hasCat = true;
+                    }
+                })
+            }
         }
-        if (hasDog && hasTurtle && hasCat)
-            console.log(currentPerson)
+        if (hasCat && hasDog && hasTurtle) {
+            console.log(`${currentPerson} has all the three species`)
+        }
     })
 }
 // ownerOfThree(persons)
+
+
+
 
 function dogSnoopy(persons) {
     persons.map(person => {
@@ -279,7 +313,7 @@ function dogSnoopy(persons) {
 function ascAndDscOfOwner(persons) {
     let listOfPersons = []
     persons.map(person => {
-        listOfPersons.push(person.name)
+        listOfPersons.push(person.name, toLowerCase())
     })
     console.log("ascending order=>", listOfPersons.sort())
     console.log("descending order=>", listOfPersons.reverse())
@@ -302,6 +336,7 @@ function dogsWithS(persons) {
     })
 }
 // dogsWithS(persons)
+
 
 
 
@@ -393,4 +428,4 @@ function sortAnimals(persons) {
     console.log(allNamesOfAnimals.sort())
 
 }
-sortAnimals(persons)
+// sortAnimals(persons)
