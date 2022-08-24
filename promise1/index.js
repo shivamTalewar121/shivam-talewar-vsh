@@ -209,4 +209,30 @@ function findSumAges(users) {
     })
 }
 
-findSumAges(users).then(result => console.log(`Total of all the ages of persons in the record is ${result}`)).catch(error => console.log(error))
+// findSumAges(users).then(result => console.log(`Total of all the ages of persons in the record is ${result}`)).catch(error => console.log(error))
+
+
+
+
+//Question 7
+
+function findAllUsers(users, char) {
+    let userNew = []
+    return new Promise((resolve, reject) => {
+        if (users !== undefined) {
+            users.map(user => userNew.push({ name: user.name, age: user.ages }))
+            if (userNew.length !== 0) {
+                resolve(userNew)
+            }
+            else {
+                reject("NO RECORDS FOUND")
+            }
+        }
+    })
+}
+// findAllUsers(users).then(resolve => console.log(resolve)).catch(error => error)
+
+
+
+//Question 8
+
