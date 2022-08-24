@@ -12,7 +12,7 @@ const users = [
     },
     {
         id: 3,
-        name: "Dean John",
+        name: "Bean John",
         username: "dd.1",
         email: "deno@google.com",
         phone: "1-123-543-1857 123212",
@@ -216,7 +216,7 @@ function findSumAges(users) {
 
 //Question 7
 
-function findAllUsers(users, char) {
+function findAllUsers(users) {
     let userNew = []
     return new Promise((resolve, reject) => {
         if (users !== undefined) {
@@ -236,3 +236,33 @@ function findAllUsers(users, char) {
 
 //Question 8
 
+function findNameAges(users, char) {
+    let array1;
+    let totalAge
+    return new Promise((resolve, reject) => {
+        if (users !== undefined) {
+            addLast(users, temp).then(res => {
+                array1 = res
+            }).then(result => {
+                displayName(array1).then(resolve => {
+                    console.log("output of question 1", resolve)
+                }).catch(error => console.log(error))
+            })
+                .catch(error => console.log(error))
+
+            array1 = users.filter(user => {
+                if (user.name.toLowerCase().includes(char.toLowerCase())) {
+                    return user.ages
+                }
+            })
+            if (array1.length === 0) {
+                reject("NO RECORDS FOUND")
+            } else {
+                totalAge = array1.reduce((acc, val) => acc += val.ages, 0)
+                resolve(`total of all ages whose name starts with B is ${totalAge}`)
+            }
+        }
+    })
+}
+
+findNameAges(users, "B").then(res => console.log(res)).catch(error => console.log(error))
