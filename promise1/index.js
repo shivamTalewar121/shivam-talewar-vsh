@@ -255,31 +255,6 @@ function findNameAges(users, char) {
 
 //Question 9
 
-// function sortingData(usersAr, char) {
-//     let order
-//     return new Promise((resolve, reject) => {
-//         if (usersAr !== undefined) {
-//             if (char == "ASC") {
-//                 order = usersAr.map(user => {
-//                     return user.name.toLowerCase()
-//                 })
-//                 order = order.sort()
-//                 resolve(order)
-//             }
-//             else if (char == "DSC") {
-//                 order = usersAr.map(user => {
-//                     return user.name.toLowerCase()
-//                 })
-//                 resolve(order.reverse())
-
-//             }
-//             else {
-//                 reject("NO RECORD")
-//             }
-//         }
-//     })
-// }
-
 function sortingData(usersAr, order) {
     return new Promise((res, rej) => {
         if (usersAr !== undefined) {
