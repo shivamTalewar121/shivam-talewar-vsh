@@ -88,7 +88,7 @@ function findAll(data) {
             } else {
                 resolve(newData)
             }
-        }else{
+        } else {
             reject("NO RECORDS FOUND")
         }
     })
@@ -100,3 +100,59 @@ function findAll(data) {
 
 
 // Question 5
+
+function allDogOwnerAge(data) {
+    return new Promise((resolve, reject) => {
+        findAllDogs(data).then(result => findSumAges(result).then(result => {
+            if (result < 0) {
+                reject("NO RECORDS FOUND")
+            } else {
+                resolve(result)
+            }
+        }).catch(error => console.log(error))).catch(error => console.log(error))
+    })
+}
+// allDogOwnerAge(data).then(result => console.log(`total of all ages of dog owners is ${result}`)).catch(error => console.log(error))
+
+
+
+
+
+// Question 6
+
+function sortingData(data, order) {
+    return new Promise((res, rej) => {
+        if (data !== undefined) {
+            if (order.toUpperCase() === "ASC") {
+                res(data.sort((a, b) => {
+                    let fa = a.name.toLowerCase(),
+                        fb = b.name.toLowerCase();
+                    if (fa < fb) {
+                        return -1;
+                    }
+                    if (fa > fb) {
+                        return 1;
+                    }
+                    return 0;
+                }))
+            } else if (order.toUpperCase() === "DSC") {
+                res(data.sort((a, b) => {
+                    let fa = a.name.toLowerCase(),
+                        fb = b.name.toLowerCase();
+                    if (fa > fb) {
+                        return -1;
+                    }
+                    if (fa < fb) {
+                        return 1;
+                    }
+                    return 0;
+                }))
+
+            } else {
+                rej("Check Argument")
+            }
+        }
+    })
+}
+
+sortingData(data, "asc").then(result => console.log(result)).catch(error => console.log(error))
