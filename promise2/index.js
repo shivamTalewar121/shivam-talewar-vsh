@@ -32,7 +32,6 @@ function findAllDogs(data) {
 
 
 
-
 // Question 2
 
 function findSpecificStartWith(data, char) {
