@@ -75,3 +75,28 @@ function findSumAges(data) {
 
 
 // Question 4
+
+function findAll(data) {
+    let newData = []
+    return new Promise((resolve, reject) => {
+        if (data !== undefined || data.length !== 0) {
+            data.map(user => {
+                newData.push({ name: user.name, age: user.age })
+            })
+            if (newData.length === 0) {
+                reject("NO RECORDS FOUND")
+            } else {
+                resolve(newData)
+            }
+        }else{
+            reject("NO RECORDS FOUND")
+        }
+    })
+}
+// findAll(data).then(result => console.log(result)).catch(error => console.log(error))
+
+
+
+
+
+// Question 5
