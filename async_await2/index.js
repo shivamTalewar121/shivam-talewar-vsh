@@ -184,11 +184,6 @@ function findForceTotal(data) {
 }
 // findForceTotal(data).then(result => console.log(result)).catch(error => console.log(error))
 
-
-
-
-
-
 //Question 6
 
 async function findAll(data, char) {
@@ -207,11 +202,6 @@ async function findAll(data, char) {
 }
 // findAll(data, "E")
 
-
-
-
-
-
 // Question 7
 
 async function findAllTotal(data, char) {
@@ -225,10 +215,6 @@ async function findAllTotal(data, char) {
     }
 }
 // findAllTotal(data, 'e')
-
-
-
-
 
 //Question 8
 
@@ -251,12 +237,6 @@ function nestedPromises(data, char) {
 }
 // nestedPromises(data, 'e').then(result=>console.log(result)).catch(error=>console.log(error))
 
-
-
-
-
-
-
 //Question 9
 
 async function allShootingUser(data) {
@@ -272,15 +252,9 @@ async function allShootingUser(data) {
 }
 // allShootingUser(data)
 
-
-
-
-
 // Question 10
 
 // Promise.all([findStartName(data, 'e'), findEndNames(data, "e"), findForce(data)]).then(result => console.log(result)).catch(error => console.log(error))
-
-
 
 //Question 11
 // const racePromises = [namesStartingWith(data, "z"), namesEndingWith(data, "r")];
