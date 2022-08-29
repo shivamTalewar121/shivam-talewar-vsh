@@ -55,10 +55,46 @@ function findStartName(data, char) {
         }
     })
 }
+
+// Q1. Write a promise function to display all name starting with 'E'.
+// funtion : findStartNames(data)
+// Hint : Filter
+
+async function namesStartingWith(dataAr, char) {
+    return new Promise((res, rej) => {
+        setTimeout(() => {
+            if (dataAr !== undefined) {
+                res(dataAr.filter(data => data.name.toLowerCase().startsWith(char.toLowerCase())));
+            } else {
+                rej("No records Found");
+            }
+        }, 2000);
+    })
+}
+
+// Q2. Write a promise function to display all name ending with 'E'.
+// funtion : findEndNames(data)
+// Hint : Filter
+
+async function namesEndingWith(dataAr, char) {
+    return new Promise((res, rej) => {
+        setTimeout(() => {
+            if (dataAr !== undefined) {
+                res(dataAr.filter(data => data.name.toLowerCase().endsWith(char.toLowerCase())));
+            } else {
+                rej("No records Found");
+            }
+        }, 4000)
+
+    })
+}
+
 // findStartName(data, 'E').then(result => console.log(result)).catch(error => console.log(error))
 
+// Q11. Using Promise.race give a call to Q1 Q2. functions.
 
 
+// Q12. Write a promise function to perform sorting on shooting in ascending order.
 
 
 // Question 2
@@ -155,17 +191,17 @@ function findForceTotal(data) {
 
 //Question 6
 
-async function findAll(data, char){
-    try{
+async function findAll(data, char) {
+    try {
         let que1 = await findStartName(data, char)
         console.log(que1);
-        let que2=await findEndNames(data, char)
+        let que2 = await findEndNames(data, char)
         console.log(que2);
         let que3 = await findForce(data)
         console.log(que3);
         let que4 = await findForceTotal(data)
         console.log(que4)
-    } catch(error){
+    } catch (error) {
         console.log(error)
     }
 }
@@ -178,13 +214,13 @@ async function findAll(data, char){
 
 // Question 7
 
-async function findAllTotal(data, char){
-    try{
+async function findAllTotal(data, char) {
+    try {
         let que1 = await findStartName(data, char);
         console.log(que1)
         let total = await findForce(que1)
         console.log(total)
-    }catch(error){
+    } catch (error) {
         console.log(error)
     }
 }
@@ -196,3 +232,72 @@ async function findAllTotal(data, char){
 
 //Question 8
 
+function nestedPromises(data, char) {
+    return new Promise((resolve, reject) => {
+        if (data !== undefined || data.length === 0) {
+            findStartName(data, char).then(result => findForce(result)
+                .then(res => {
+                    if (res <= 0) {
+                        reject("NO RECORDS")
+                    } else {
+                        resolve(res)
+                    }
+                }).catch(error => console.log(error))
+            ).catch(error => console.log(error))
+        } else {
+            reject("PLEASE ENTER CORRECT DATA")
+        }
+    })
+}
+// nestedPromises(data, 'e').then(result=>console.log(result)).catch(error=>console.log(error))
+
+
+
+
+
+
+
+//Question 9
+
+async function allShootingUser(data) {
+    let newData
+    if (data !== undefined && data.length !== 0) {
+        newData = await data.filter(user => user.isForceUser === true).map(result => {
+            if (result.shootingScore > 10) {
+                return result.name
+            }
+        })
+    }
+    console.log(newData)
+}
+// allShootingUser(data)
+
+
+
+
+
+// Question 10
+
+// Promise.all([findStartName(data, 'e'), findEndNames(data, "e"), findForce(data)]).then(result => console.log(result)).catch(error => console.log(error))
+
+
+
+//Question 11
+// const racePromises = [namesStartingWith(data, "z"), namesEndingWith(data, "r")];
+// Promise.race(racePromises).then(res => console.log(res)).catch(err => console.log(err));
+
+// Q12. Write a promise function to perform sorting on shooting in ascending order.
+
+const sortShooting = async (dataAr) => {
+    return new Promise((res, rej) => {
+        if (dataAr !== undefined) {
+            res(dataAr.sort((a, b) => {
+                return a.shootingScore - b.shootingScore;
+            }))
+        } else {
+            rej("No records Found")
+        }
+    })
+}
+
+sortShooting(data).then(res => console.log(res)).catch(err => console.log(err));
