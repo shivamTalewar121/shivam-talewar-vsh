@@ -189,7 +189,104 @@ function isName(property){
 //   { name: 'Jane', grade: 9, sex: 'F' } ]
 
 function getSpecific(grades){
-    return function nameStarts(char){
-
+    return function nameStarts(property){
+        if(property.toLowerCase()==="name"){
+            return function names(char){
+                if(char.toUpperCase()==="J"){
+                    let users = grades.filter(user=>user.name.toLowerCase().startsWith(char.toLowerCase()))
+                    console.log(users)
+                }else{
+                    console.log("Enter 'J' to see records")
+                }
+            }
+        }else{
+            console.log("Please enter the correct property")
+        }
     }
 }
+// getSpecific(grades)('name')('J')
+
+
+
+
+
+// Q9 :Write a HOF function to display List of all students starting with J and gender is M
+// o/p
+// List of all students starting with J and gender is M 
+// [ { name: 'John', grade: 8, sex: 'M' },
+//   { name: 'Johnny', grade: 2, sex: 'M' } ] 
+
+function nameStarts(grades){
+    return function getSpecific(property){
+        if(property.toLowerCase()==="name"){
+            return function names(char){
+                if(char.toUpperCase()==="J")
+                {
+                    return function user(init){
+                        if(init.toUpperCase()==="M"){
+                            let users = grades.filter(result=>result.name.toLowerCase().startsWith(char.toLowerCase()))
+                            users = users.filter(result=>result.sex==="M")
+                            let average = users.reduce((acc,val)=>acc+=val.grade, 0)
+                            console.log(users)
+                            console.log(`average of all students name starting with J and sex M is${average/users.length}`)
+                        }else if(init.toUpperCase()==="F"){
+                            users = grades.filter(result=>result.name.toLowerCase().startsWith(char.toLowerCase()))
+                            users = users.filter(result=>result.sex==="F")
+                            console.log(users)
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// nameStarts(grades)("name")("J")("M")
+
+
+
+
+
+// Q10. Write a HOF function to find average of  List of all students starting with J and gender is M
+// o/p
+// Average of all students starting with J and gender is M 
+// 5
+
+// nameStarts(grades)("name")("J")("M")
+
+
+
+
+
+// Q11. Write a HOF function to find student name having highest grade
+// Hint : sorting on object by 'grade' property.
+// Hint : sorting on object by 'grade' property ASC and DESC
+//          grades.sort(sortBy('grade')('ASC')
+//          getName('name')(grades.sort(sortBy('grade')('ASC'))[0])
+
+// o/p : Lowest Grade Student  Johnny
+
+function sorting(grades){
+    return function sortByGrade(init){
+        if(init.toUpperCase()==="GRADE"){
+            return function sorting(char)
+            {
+                if(char.toUpperCase()==="ASC"){
+                    let user = grades.sort((a,b)=>a.grade-b.grade)
+                    console.log(user)
+                    console.log(`the person with highest grade is ${user[user.length-1].name}`)
+                    console.log(`the person with lowest grade is ${user[0].name}`)
+                }else if(char.toUpperCase()==="DSC"){
+                    user=grades.sort((a,b)=>b.grade-a.grade)
+                    console.log(user)
+                    console.log(`the person with highest grade is ${user[0].name}`)
+                    console.log(`the person with lowest grade is ${user[user.length-1].name}`)
+                }else{
+                    console.log("Please Enter correct order for sorting")
+                }
+            }
+}else {
+    console.log("please enter 'grade' to see the sorting")
+}
+}}
+sorting(grades)("grade")('asc')
