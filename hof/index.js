@@ -17,20 +17,20 @@ var grades = [
 // o / p :
 // Average of All Students 10.2
 
-function average(grades){
-    return function score(char){
-        if(char==="grade"){
-            if(grades!==undefined){
-        let totalScore=grades.reduce((acc, val)=>val = acc+val.grade,0)
-        let length = grades.length
-        let avgScore = totalScore/length
-        console.log(`average of all students ${char} is ${avgScore}`)
-    }else{
-        console.log("records are empty")
-    }
-    }else {
-        console.log("please enter valid argument")
-    }
+function average(grades) {
+    return function score(char) {
+        if (char === "grade") {
+            if (grades !== undefined) {
+                let totalScore = grades.reduce((acc, val) => val = acc + val.grade, 0)
+                let length = grades.length
+                let avgScore = totalScore / length
+                console.log(`average of all students ${char} is ${avgScore}`)
+            } else {
+                console.log("records are empty")
+            }
+        } else {
+            console.log("please enter valid argument")
+        }
     }
 }
 // average(grades)("grade")
@@ -50,24 +50,24 @@ function average(grades){
 //   { name: 'Donald', grade: 5, sex: 'M' } ]
 
 
-function getGender(grades){
-    return function sex(char){
-        if(char.toLowerCase()==='sex'){
-            return function gender(init){
-                if(init.toUpperCase()==="M"){
-                    let all = grades.filter(user=>user.sex==="M")
+function getGender(grades) {
+    return function sex(char) {
+        if (char.toLowerCase() === 'sex') {
+            return function gender(init) {
+                if (init.toUpperCase() === "M") {
+                    let all = grades.filter(user => user.sex === "M")
                     console.log(all)
                     return all
-                }else if(init.toUpperCase()==="F"){
-                    all=grades.filter(user=>user.sex==="F")
+                } else if (init.toUpperCase() === "F") {
+                    all = grades.filter(user => user.sex === "F")
                     console.log(all)
                     return all
-                }else{
+                } else {
                     console.log("please enter valid gender")
                     return undefined;
                 }
             }
-        }else{
+        } else {
             console.log("please enter valid argument")
         }
     }
@@ -124,20 +124,20 @@ function getGender(grades){
 //           eg:  isGender('sex')('M')(obj) 
 //           obj = { name: 'John', grade: 8, sex: 'M' } o/p : true
 
-function isGender(property){
-    if(property.toLowerCase()==='sex'){
-        return function gender(char){
-            return function isTure(obj){
-                if(obj.sex.toLowerCase()===char.toLowerCase()){
+function isGender(property) {
+    if (property.toLowerCase() === 'sex') {
+        return function gender(char) {
+            return function isTure(obj) {
+                if (obj.sex.toLowerCase() === char.toLowerCase()) {
                     console.log(true)
                     console.log(`entered gender ${char} matches to the object gender ${obj.sex}`)
-                }else{
+                } else {
                     console.log(false)
                     console.log(`entered gender does not matches to the objects gender`)
                 }
             }
         }
-    }else{
+    } else {
         console.log("please enter valid property")
     }
 }
@@ -154,22 +154,22 @@ function isGender(property){
 //           eg:  isGender('sex')('J')(obj) 
 //           obj = { name: 'John', grade: 8, sex: 'M' } // true
 
-function isName(property){
-    if(property.toLowerCase()==='sex'){
-    return function genderType(char){
-        return function name(obj){
-            if(obj.name.toLowerCase().startsWith(char.toLowerCase())){
-                console.log(obj)
-                console.log(`${true} the name starts with ${char}`)
-            }else{
-                console.log(obj)
-                console.log(`${false} the name does not starts with ${char}`)
+function isName(property) {
+    if (property.toLowerCase() === 'sex') {
+        return function genderType(char) {
+            return function name(obj) {
+                if (obj.name.toLowerCase().startsWith(char.toLowerCase())) {
+                    console.log(obj)
+                    console.log(`${true} the name starts with ${char}`)
+                } else {
+                    console.log(obj)
+                    console.log(`${false} the name does not starts with ${char}`)
+                }
             }
         }
+    } else {
+        console.log('please enter the correct property')
     }
-}else{
-    console.log('please enter the correct property')
-}
 }
 // isName('sex')('J')(grades[0])
 
@@ -188,18 +188,18 @@ function isName(property){
 //   { name: 'Jennifer', grade: 13, sex: 'F' },
 //   { name: 'Jane', grade: 9, sex: 'F' } ]
 
-function getSpecific(grades){
-    return function nameStarts(property){
-        if(property.toLowerCase()==="name"){
-            return function names(char){
-                if(char.toUpperCase()==="J"){
-                    let users = grades.filter(user=>user.name.toLowerCase().startsWith(char.toLowerCase()))
+function getSpecific(grades) {
+    return function nameStarts(property) {
+        if (property.toLowerCase() === "name") {
+            return function names(char) {
+                if (char.toUpperCase() === "J") {
+                    let users = grades.filter(user => user.name.toLowerCase().startsWith(char.toLowerCase()))
                     console.log(users)
-                }else{
+                } else {
                     console.log("Enter 'J' to see records")
                 }
             }
-        }else{
+        } else {
             console.log("Please enter the correct property")
         }
     }
@@ -216,22 +216,21 @@ function getSpecific(grades){
 // [ { name: 'John', grade: 8, sex: 'M' },
 //   { name: 'Johnny', grade: 2, sex: 'M' } ] 
 
-function nameStarts(grades){
-    return function getSpecific(property){
-        if(property.toLowerCase()==="name"){
-            return function names(char){
-                if(char.toUpperCase()==="J")
-                {
-                    return function user(init){
-                        if(init.toUpperCase()==="M"){
-                            let users = grades.filter(result=>result.name.toLowerCase().startsWith(char.toLowerCase()))
-                            users = users.filter(result=>result.sex==="M")
-                            let average = users.reduce((acc,val)=>acc+=val.grade, 0)
+function nameStarts(grades) {
+    return function getSpecific(property) {
+        if (property.toLowerCase() === "name") {
+            return function names(char) {
+                if (char.toUpperCase() === "J") {
+                    return function user(init) {
+                        if (init.toUpperCase() === "M") {
+                            let users = grades.filter(result => result.name.toLowerCase().startsWith(char.toLowerCase()))
+                            users = users.filter(result => result.sex === "M")
+                            let average = users.reduce((acc, val) => acc += val.grade, 0)
                             console.log(users)
-                            console.log(`average of all students name starting with J and sex M is${average/users.length}`)
-                        }else if(init.toUpperCase()==="F"){
-                            users = grades.filter(result=>result.name.toLowerCase().startsWith(char.toLowerCase()))
-                            users = users.filter(result=>result.sex==="F")
+                            console.log(`average of all students name starting with J and sex M is${average / users.length}`)
+                        } else if (init.toUpperCase() === "F") {
+                            users = grades.filter(result => result.name.toLowerCase().startsWith(char.toLowerCase()))
+                            users = users.filter(result => result.sex === "F")
                             console.log(users)
                         }
                     }
@@ -266,27 +265,104 @@ function nameStarts(grades){
 
 // o/p : Lowest Grade Student  Johnny
 
-function sorting(grades){
-    return function sortByGrade(init){
-        if(init.toUpperCase()==="GRADE"){
-            return function sorting(char)
-            {
-                if(char.toUpperCase()==="ASC"){
-                    let user = grades.sort((a,b)=>a.grade-b.grade)
-                    console.log(user)
-                    console.log(`the person with highest grade is ${user[user.length-1].name}`)
+function sorting(grades) {
+    let user
+    return function sortBy(init) {
+        if (init.toUpperCase() === "GRADE") {
+            return function sorting(char) {
+                if (char.toUpperCase() === "ASC") {
+                    return user = grades.sort((a, b) => a.grade - b.grade)
+                    // console.log(user)
+                    console.log(`the person with highest grade is ${user[user.length - 1].name}`)
                     console.log(`the person with lowest grade is ${user[0].name}`)
-                }else if(char.toUpperCase()==="DSC"){
-                    user=grades.sort((a,b)=>b.grade-a.grade)
-                    console.log(user)
+                } else if (char.toUpperCase() === "DSC") {
+                    return user = grades.sort((a, b) => b.grade - a.grade)
+                    // console.log(user)
                     console.log(`the person with highest grade is ${user[0].name}`)
-                    console.log(`the person with lowest grade is ${user[user.length-1].name}`)
-                }else{
+                    console.log(`the person with lowest grade is ${user[user.length - 1].name}`)
+                } else {
                     console.log("Please Enter correct order for sorting")
                 }
             }
-}else {
-    console.log("please enter 'grade' to see the sorting")
+        } else {
+            console.log("please enter 'grade' to see the sorting")
+        }
+    }
 }
-}}
-sorting(grades)("grade")('asc')
+
+function getName(name) {
+    if(name.toLowerCase()==="name"){
+    return function sortedArray(list) {
+    let lowestPerson = list[0]
+    return lowestPerson
+    }
+}else{
+    console.log("please provide valid argument")
+}
+}
+// getName('name')(sorting(grades)('grade')('asc'))
+// console.log(`lowest grade student ${getName('name')(sorting(grades)('grade')('asc')).name}`)
+
+
+
+
+// Q12. Write a HOF function to find student name having Lowest grade
+// Hint : sorting on object by 'grade' property ASC and DESC
+//          grades.sort(sortBy('grade')('ASC')
+//          getName('name')(grades.sort(sortBy('grade')('ASC'))[0])
+// o/p : Higest Grade Student  Paula
+
+function highestGradeStudent(person){
+    console.log(`highest grade student ${person.name}`)
+}
+// highestGradeStudent(getName('name')(sorting(grades)('grade')('dsc')))
+
+
+
+
+
+
+// Q13: Write a HOF function to find student name and grade having highest grade.
+// o/p : { name:'Paul',grade:18}
+
+function highGrade(person){
+    console.log({name:person.name, grade: person.grade})
+}
+// highGrade(getName('name')(sorting(grades)('grade')('dsc')))
+
+
+
+
+// Q14: Write a HOF function to find student name and grade having Lowest grade.
+// o/p : { name:'Johnny',grade:2}
+
+function lowestGrade(person){
+    console.log({name: person.name, grade: person.grade})
+}
+// lowestGrade(getName('name')(sorting(grades)('grade')('asc')))
+
+
+
+
+// Q15: Write a HOF function to find student object having highest grade.
+// o/p : 
+// {name: 'Paula', grade: 18, sex: 'F'},
+
+function topGrade(person){
+    console.log(person)
+}
+// topGrade(getName('name')(sorting(grades)('grade')('dsc')))
+
+
+
+
+
+// Q16: Write a HOF function to find student object having Lowest grade.
+// o/p : 
+// {name: 'Johnny', grade: 2, sex: 'M'},
+
+
+function lowGrade(person){
+    console.log(person)
+}
+lowGrade(getName('name')(sorting(grades)('grade')('asc')))
