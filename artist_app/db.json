@@ -1,0 +1,20 @@
+{
+    "users":[
+        {
+            "id" : "u1",
+            "name" : "ram"
+        },
+        {
+            "id" : "u2",
+            "name" : "shyam"
+        },
+        {
+            "id" : "u3",
+            "name" : "balram"
+        },
+        {
+            "id" : "u4",
+            "name" : "venkatram"
+        }
+    ]
+}
