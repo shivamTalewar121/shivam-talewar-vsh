@@ -2,6 +2,7 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 
 const Sidenav = () => {
+
     return (
     <div className='sidenav'>
         <div className='sidenav-container'>

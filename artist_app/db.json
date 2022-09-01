@@ -1,20 +1,19 @@
 {
-    "users":[
-        {
-            "id" : "u1",
-            "name" : "ram"
-        },
-        {
-            "id" : "u2",
-            "name" : "shyam"
-        },
-        {
-            "id" : "u3",
-            "name" : "balram"
-        },
-        {
-            "id" : "u4",
-            "name" : "venkatram"
-        }
-    ]
+  "users": [
+    {
+      "uid": "uid 2",
+      "name": "neeraj",
+      "id": 2
+    },
+    {
+      "uid": "uid2",
+      "name": "nishant",
+      "id": 3
+    },
+    {
+      "uid": "uid3",
+      "name": "shivam",
+      "id": 4
+    }
+  ]
 }
