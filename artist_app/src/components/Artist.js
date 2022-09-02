@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
-const Home = () => {
+const Artist = () => {
 
-    const [userId, setUserId]=useState()
+    const [artistId, setArtistId]=useState()
 
-    const initialValue = { uid: '', name: '' }
+    const initialValue = { aid: '', name: '' }
 
     const [formValue, setFormValue] = useState(initialValue)
 
-    const { uid, name } = formValue
+    const { aid, name } = formValue
 
-    const [users, setUsers] = useState([])
+    const [artists, setArtists] = useState([])
 
     const [btn, setBtn]=useState(true)
 
     const getApi = async () => {
         try {
-            let result = await axios.get('http://localhost:3000/users')
-            setUsers(result.data)
+            let result = await axios.get('http://localhost:3000/artists')
+            setArtists(result.data)
         } catch (error) {
             console.log(error)
         }
@@ -32,10 +32,10 @@ const Home = () => {
     const handleClick = async (event) => {
             event.preventDefault()
             try {
-                const result = await axios.post('http://localhost:3000/users', {
-                    uid: uid, name: name
+                const result = await axios.post('http://localhost:3000/artists', {
+                    aid: aid, name: name
                 })
-                setUsers([...users, result.data])
+                setArtists([...artists, result.data])
             } catch (error) {
                 console.log(error)
             }
@@ -44,14 +44,14 @@ const Home = () => {
 
     useEffect(() => {
         getApi()
-    }, [formValue, users])
+    }, [formValue, artists])
 
     const handleEdit = async (event, id) => {
         setBtn(false)
-        setUserId(id)
+        setArtistId(id)
         try {
-            const result = await axios.get(`http://localhost:3000/users/${id}`);
-            setFormValue({uid: result.data.uid, name: result.data.name})
+            const result = await axios.get(`http://localhost:3000/artists/${id}`);
+            setFormValue({aid: result.data.aid, name: result.data.name})
         } catch (error) {
             console.log(error);
         }
@@ -59,7 +59,7 @@ const Home = () => {
 
     const handleDelete = async (e, id) => {
         try{
-            await axios.delete(`http://localhost:3000/users/${id}`)
+            await axios.delete(`http://localhost:3000/artists/${id}`)
         }catch(error){
             console.log(error)
         }
@@ -67,8 +67,8 @@ const Home = () => {
 
     const handleUpdate = async () =>{
         try{
-            await axios.put(`http://localhost:3000/users/${userId}`, {
-                uid: uid, name: name
+            await axios.put(`http://localhost:3000/artists/${artistId}`, {
+                aid: aid, name: name
             })
         } catch(error){
             console.log(error)
@@ -81,13 +81,13 @@ const Home = () => {
         <div className='main-page'>
             <div className='main-page__content'>
                 <div className='content-input'>
-                    <h1>Users List</h1>
+                    <h1>Artists List</h1>
                     <div className='input-group'>
-                        <label style={{marginRight:"25px"}} htmlFor='uid'>UID: </label>
-                        <input type="text" id='uid' name='uid' onChange={handleChange} value={uid} />
+                        <label style={{marginRight:"15px"}} htmlFor='aid'>A_ID:</label>
+                        <input type="text" id='aid' name='aid' onChange={handleChange} value={aid} />
                     </div>
                     <div className='input-group'>
-                        <label style={{marginRight:"10px"}} htmlFor="name">Name:</label>
+                        <label style={{marginRight:"10px"}} htmlFor="name">Name</label>
                         <input type='text' id='name' name='name' onChange={handleChange} value={name} />
                     </div>
                     {btn===true?<button className='add' id='add' onClick={handleClick}>Add</button>:<button className='update' id='update' onClick={handleUpdate}>Update</button>}
@@ -98,18 +98,18 @@ const Home = () => {
                             <tr>
                                 <th>Edit</th>
                                 <th>Delete</th>
-                                <th>Uid</th>
+                                <th>A_id</th>
                                 <th>Name</th>
                             </tr>
                         </thead>
                         <tbody className='table-data'>
                             {
-                                users.map((user) => {
+                                artists.map((user) => {
                                     return (
                                         <tr key={user.id}>
                                             <td><button onClick={(e) => handleEdit(e, user.id)}>edit</button></td>
                                             <td><button onClick={(e)=>handleDelete(e,user.id)}>delete</button></td>
-                                            <td>{user.uid}</td>
+                                            <td>{user.aid}</td>
                                             <td>{user.name}</td>
                                         </tr>
                                     )
@@ -123,4 +123,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default Artist

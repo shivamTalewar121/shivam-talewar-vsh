@@ -70,3 +70,6 @@
     display: flex;
   }
   
+  .list-item{
+    cursor: pointer;
+  }
