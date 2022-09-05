@@ -1,123 +1,86 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { addArtist, editArtist, delArtists, getArtists, updateArtist} from '../redux/actions/ArtistActions'
+import { useDispatch, useSelector } from 'react-redux'
 
 const Artist = () => {
 
-    const [artistId, setArtistId]=useState()
+    let initialValue = {name: ""}
 
-    const initialValue = { aid: '', name: '' }
+    const dispatch = useDispatch()
+
+    const [artistId, setArtistId] = useState()
 
     const [formValue, setFormValue] = useState(initialValue)
 
-    const { aid, name } = formValue
+    const [btn, setBtn] = useState(true)
 
-    const [artists, setArtists] = useState([])
-
-    const [btn, setBtn]=useState(true)
-
-    const getApi = async () => {
-        try {
-            let result = await axios.get('http://localhost:3000/artists')
-            setArtists(result.data)
-        } catch (error) {
-            console.log(error)
-        }
-    }
+    let artistData = useSelector((state)=>state.UserReducer.artistList)
 
     const handleChange = (event) => {
         const { name, value } = event.target
         setFormValue({ ...formValue, [name]: value })
     }
 
-    const handleClick = async (event) => {
-            event.preventDefault()
-            try {
-                const result = await axios.post('http://localhost:3000/artists', {
-                    aid: aid, name: name
-                })
-                setArtists([...artists, result.data])
-            } catch (error) {
-                console.log(error)
-            }
-            setFormValue(initialValue)
+    const handleClick = (event, uid, name) => {
+        event.preventDefault()
+        dispatch(addArtist(uid,name))
+        setFormValue({uid:'', name:''})
     }
 
     useEffect(() => {
-        getApi()
-    }, [formValue, artists])
+        dispatch(getArtists())
+    }, [dispatch])
 
     const handleEdit = async (event, id) => {
-        setBtn(false)
-        setArtistId(id)
-        try {
-            const result = await axios.get(`http://localhost:3000/artists/${id}`);
-            setFormValue({aid: result.data.aid, name: result.data.name})
-        } catch (error) {
-            console.log(error);
-        }
+        dispatch(editArtist(id, setFormValue, setBtn, setArtistId))
     }
 
     const handleDelete = async (e, id) => {
-        try{
-            await axios.delete(`http://localhost:3000/artists/${id}`)
-        }catch(error){
-            console.log(error)
-        }
+        dispatch(delArtists(id))
     }
 
-    const handleUpdate = async () =>{
-        try{
-            await axios.put(`http://localhost:3000/artists/${artistId}`, {
-                aid: aid, name: name
-            })
-        } catch(error){
-            console.log(error)
-        }
-        setFormValue(initialValue)
-        setBtn(true)
+    const handleUpdate = async () => {
+        dispatch(updateArtist(artistId,formValue.name, setBtn, setFormValue))
     }
 
     return (
-        <div className='main-page'>
-            <div className='main-page__content'>
-                <div className='content-input'>
-                    <h1>Artists List</h1>
-                    <div className='input-group'>
-                        <label style={{marginRight:"15px"}} htmlFor='aid'>A_ID:</label>
-                        <input type="text" id='aid' name='aid' onChange={handleChange} value={aid} />
+        <div className='container-fluid'>
+            <div className='artist-input'>
+                <h3 className='text-center'>Artist</h3>
+                <div className='input-box text-center'>
+                    <div className='container input-content' style={{display:'flex',justifyContent:'center',marginTop:'20px', width:'420px'}}>
+                        <label className='me-3' style={{fontWeight:'bold'}}>Name:</label>
+                        <input type='text' className='form-control' name='name' onChange={handleChange} value={formValue.name}/>
                     </div>
-                    <div className='input-group'>
-                        <label style={{marginRight:"10px"}} htmlFor="name">Name</label>
-                        <input type='text' id='name' name='name' onChange={handleChange} value={name} />
-                    </div>
-                    {btn===true?<button className='add' id='add' onClick={handleClick}>Add</button>:<button className='update' id='update' onClick={handleUpdate}>Update</button>}
+                    {btn === true ? <button className='btn btn-primary add mt-4' id='add' onClick={(e)=>handleClick(e,formValue.name)}>Add</button> : <button className='btn btn-success update mt-4' id='update' onClick={handleUpdate}>Update</button>}
                 </div>
-                <div className='content-table'>
-                    <table>
-                        <thead className='table-header'>
-                            <tr>
-                                <th>Edit</th>
-                                <th>Delete</th>
-                                <th>A_id</th>
-                                <th>Name</th>
-                            </tr>
-                        </thead>
-                        <tbody className='table-data'>
-                            {
-                                artists.map((user) => {
+            </div>
+            <div className='text-center mt-5'>
+                <table className='table shadow'>
+                    <thead>
+                    <tr className='table-dark'>
+                        <th>AID</th>
+                        <th>NAME</th>
+                        <th>EDIT</th>
+                        <th>DELETE</th>
+                    </tr>
+                    </thead>
+                    <tbody className='table-primary'>
+                    {
+                                artistData.map((artist) => {
                                     return (
-                                        <tr key={user.id}>
-                                            <td><button onClick={(e) => handleEdit(e, user.id)}>edit</button></td>
-                                            <td><button onClick={(e)=>handleDelete(e,user.id)}>delete</button></td>
-                                            <td>{user.aid}</td>
-                                            <td>{user.name}</td>
+                                        <tr key={artist.id}>
+                                            <td>a{artist.id}</td>
+                                            <td>{artist.name}</td>
+                                            <td><button className='btn btn-warning' onClick={(e) => handleEdit(e, artist.id)}>edit</button></td>
+                                            <td><button className='btn btn-danger' onClick={(e) => handleDelete(e, artist.id)}>delete</button></td>
                                         </tr>
                                     )
                                 })
                             }
-                        </tbody>
-                    </table>
-                </div>
+                    </tbody>
+                </table>
             </div>
         </div>
     )

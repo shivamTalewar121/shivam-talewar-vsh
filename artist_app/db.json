@@ -1,36 +1,22 @@
 {
   "users": [
     {
-      "uid": "uid 1",
-      "name": "alka Yagnic",
-      "id": 2
+      "name": "rahul",
+      "id": 1
     },
     {
-      "uid": "uid 2",
-      "name": "nishant",
-      "id": 3
-    },
-    {
-      "uid": "uid 3",
       "name": "shivam",
-      "id": 4
+      "id": 2
     }
   ],
   "artists": [
     {
-      "aid": "a1",
-      "name": "alka yagnic",
+      "name": "kumar sanu",
       "id": 2
     },
     {
-      "aid": "a2",
-      "name": "kumar sanu",
-      "id": 3
-    },
-    {
-      "aid": "a3",
       "name": "pritam",
-      "id": 4
+      "id": 3
     }
   ]
 }

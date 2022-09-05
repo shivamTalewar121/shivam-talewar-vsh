@@ -1,126 +1,87 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { addUser, delUsers, editUser, getUsers, updateUser} from '../redux/actions/userActions';
+import axios from 'axios';
 
 const Home = () => {
+    let initialValue = {name: ""}
 
-    const [userId, setUserId]=useState()
+    const dispatch = useDispatch()
 
-    const initialValue = { uid: '', name: '' }
+    const [userId, setUserId] = useState()
 
     const [formValue, setFormValue] = useState(initialValue)
 
-    const { uid, name } = formValue
+    const [btn, setBtn] = useState(true)
 
-    const [users, setUsers] = useState([])
-
-    const [btn, setBtn]=useState(true)
-
-    const getApi = async () => {
-        try {
-            let result = await axios.get('http://localhost:3000/users')
-            setUsers(result.data)
-        } catch (error) {
-            console.log(error)
-        }
-    }
+    let userData = useSelector((state)=>state.UserReducer.userList)
 
     const handleChange = (event) => {
         const { name, value } = event.target
         setFormValue({ ...formValue, [name]: value })
     }
 
-    const handleClick = async (event) => {
-            event.preventDefault()
-            try {
-                const result = await axios.post('http://localhost:3000/users', {
-                    uid: uid, name: name
-                })
-                setUsers([...users, result.data])
-            } catch (error) {
-                console.log(error)
-            }
-            setFormValue(initialValue)
+    const handleClick = (event, uid, name) => {
+        event.preventDefault()
+        dispatch(addUser(uid,name))
+        setFormValue({uid:'', name:''})
     }
 
     useEffect(() => {
-        getApi()
-    }, [formValue, users])
+        dispatch(getUsers())
+    }, [dispatch])
 
     const handleEdit = async (event, id) => {
-        setBtn(false)
-        setUserId(id)
-        try {
-            const result = await axios.get(`http://localhost:3000/users/${id}`);
-            setFormValue({uid: result.data.uid, name: result.data.name})
-        } catch (error) {
-            console.log(error);
-        }
+        dispatch(editUser(id, setFormValue, setBtn, setUserId))
     }
 
     const handleDelete = async (e, id) => {
-        try{
-            await axios.delete(`http://localhost:3000/users/${id}`)
-        }catch(error){
-            console.log(error)
-        }
+        dispatch(delUsers(id))
     }
 
-    const handleUpdate = async () =>{
-        try{
-            await axios.put(`http://localhost:3000/users/${userId}`, {
-                uid: uid, name: name
-            })
-        } catch(error){
-            console.log(error)
-        }
-        setFormValue(initialValue)
-        setBtn(true)
+    const handleUpdate = async () => {
+        dispatch(updateUser(userId,formValue.name, setBtn, setFormValue))
     }
 
     return (
-        <div className='main-page'>
-            <div className='main-page__content'>
-                <div className='content-input'>
-                    <h1>Users List</h1>
-                    <div className='input-group'>
-                        <label style={{marginRight:"25px"}} htmlFor='uid'>UID: </label>
-                        <input type="text" id='uid' name='uid' onChange={handleChange} value={uid} />
+        <div className='container-fluid'>
+            <div className='user-input'>
+                <h3 className='text-center'>User</h3>
+                <div className='input-box text-center'>
+                    <div className='container input-content' style={{display:'flex',justifyContent:'center',marginTop:'20px', width:'420px'}}>
+                        <label className='me-3' style={{fontWeight:'bold'}}>Name:</label>
+                        <input type='text' className='form-control' name='name' onChange={handleChange} value={formValue.name}/>
                     </div>
-                    <div className='input-group'>
-                        <label style={{marginRight:"10px"}} htmlFor="name">Name:</label>
-                        <input type='text' id='name' name='name' onChange={handleChange} value={name} />
-                    </div>
-                    {btn===true?<button className='add' id='add' onClick={handleClick}>Add</button>:<button className='update' id='update' onClick={handleUpdate}>Update</button>}
+                    {btn === true ? <button className='btn btn-primary add mt-4' id='add' onClick={(e)=>handleClick(e,formValue.name)}>Add</button> : <button className='btn btn-success update mt-4' id='update' onClick={handleUpdate}>Update</button>}
                 </div>
-                <div className='content-table'>
-                    <table>
-                        <thead className='table-header'>
-                            <tr>
-                                <th>Edit</th>
-                                <th>Delete</th>
-                                <th>Uid</th>
-                                <th>Name</th>
-                            </tr>
-                        </thead>
-                        <tbody className='table-data'>
-                            {
-                                users.map((user) => {
+            </div>
+            <div className='text-center mt-5'>
+                <table className='table shadow'>
+                    <thead>
+                    <tr className='table-dark'>
+                        <th>UID</th>
+                        <th>NAME</th>
+                        <th>EDIT</th>
+                        <th>DELETE</th>
+                    </tr>
+                    </thead>
+                    <tbody className='table-primary'>
+                    {
+                                userData.map((user) => {
                                     return (
                                         <tr key={user.id}>
-                                            <td><button onClick={(e) => handleEdit(e, user.id)}>edit</button></td>
-                                            <td><button onClick={(e)=>handleDelete(e,user.id)}>delete</button></td>
-                                            <td>{user.uid}</td>
+                                            <td>u{user.id}</td>
                                             <td>{user.name}</td>
+                                            <td><button className='btn btn-warning' onClick={(e) => handleEdit(e, user.id)}>edit</button></td>
+                                            <td><button className='btn btn-danger' onClick={(e) => handleDelete(e, user.id)}>delete</button></td>
                                         </tr>
                                     )
                                 })
                             }
-                        </tbody>
-                    </table>
-                </div>
+                    </tbody>
+                </table>
             </div>
         </div>
     )
 }
-
 export default Home

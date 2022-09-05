@@ -6,7 +6,7 @@ const Sidenav = () => {
 
     const handleNavigation = (e) => {
         let path = (e.target.innerText).toLowerCase();
-        if (path === 'users') {
+        if (path === 'users' || path === 'artists') {
             navigate("/");
         }
         else {
@@ -14,19 +14,39 @@ const Sidenav = () => {
         }
     }
     return (
-        <div className='sidenav'>
-            <div className='sidenav-container'>
-                <ul className='nav-list' style={{ listStyle: "none" }}>
-                    <li onClick={(e) => handleNavigation(e)} className='list-item' style={{ textDecoration: "underline" }}>Users</li>
-                    <li onClick={(e) => handleNavigation(e)} className='list-item' style={{ textDecoration: "underline" }}>Artist</li>
-                    <li onClick={(e) => handleNavigation(e)} className='list-item' style={{ textDecoration: "underline" }}>Albums</li>
-                    <li onClick={(e) => handleNavigation(e)} className='list-item' style={{ textDecoration: "underline" }}>Users Rating</li>
-                    <li onClick={(e) => handleNavigation(e)} className='list-item' style={{ textDecoration: "underline" }}>Albums Rating</li>
-                </ul>
+    <div className='container-fluid'>
+        <div className='container-fluid' style={{cursor:'pointer'}}>
+        <nav className="navbar navbar-dark navbar-expand-lg bg-dark">
+            <div className="container-fluid">
+            <a className="navbar-brand" onClick={(e)=>handleNavigation(e)}>Artists</a>
+            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+            </button>
+                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li className="nav-item">
+                        <a className="nav-link" aria-current="page" onClick={(e)=>handleNavigation(e)}>Users</a>
+                        </li>
+                        <li className="nav-item">
+                        <a className="nav-link" onClick={(e)=>handleNavigation(e)}>Artist</a>
+                        </li> 
+                        <li className="nav-item">
+                        <a className="nav-link" onClick={(e)=>handleNavigation(e)}>Albums</a>
+                        </li> 
+                        <li className="nav-item">
+                        <a className="nav-link" onClick={(e)=>handleNavigation(e)}>Users_Rating</a>
+                        </li> 
+                        <li className="nav-item">
+                        <a className="nav-link" onClick={(e)=>handleNavigation(e)}>Albums_Rating</a>
+                        </li> 
+                    </ul>
+                </div>
             </div>
-
-            <Outlet />
+        </nav>
         </div>
+
+    <Outlet/>
+</div>
     )
 }
 
