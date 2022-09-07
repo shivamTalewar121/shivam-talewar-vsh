@@ -18,5 +18,60 @@
       "name": "pritam",
       "id": 3
     }
+  ],
+  "albums": [
+    {
+      "name": "tere naam",
+      "id": 1
+    },
+    {
+      "name": "zara sa",
+      "id": 2
+    },
+    {
+      "name": "joker mera naam",
+      "id": 3
+    },
+    {
+      "name": "dil hai hindustani",
+      "id": 4
+    },
+    {
+      "name": "tere ho k ",
+      "id": 5
+    }
+  ],
+  
+  "user-rating": [
+    {
+        "id": 1,
+        "name":"rahul",
+        "albums":[
+          {
+            "url": "https://img.indiaforums.com/article/1040x780/16/2878-salman-khan-might-have-been-dead-had-his-costar-not-pulled-him-at-the-right-time.jpg?c=6cV060",
+            "name": "tere naam",
+            "id" : 1,
+            "rating":3
+          },
+          {
+            "url": "https://lyricalduniya.com/wp-content/uploads/2017/11/jannat-mo.jpg",
+            "id": 2,
+            "name": "Jannat",
+            "rating":3
+          },
+          {
+            "url": "https://m.media-amazon.com/images/M/MV5BODUxNjU0NDItY2FmZi00YWQzLWI4YjAtZjYyNWZhODc3ZTZhXkEyXkFqcGdeQXVyNjQ2MjQ5NzM@._V1_FMjpg_UX1000_.jpg",
+            "id": 3,
+            "name": "mera nam joker",
+            "rating":3
+          },
+          {
+            "url": "https://m.media-amazon.com/images/M/MV5BNWQ2YjVlMDEtNmU0OC00YTVjLWFmZTUtY2VkZWJhNmVhZjQ1L2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMzg0ODc1MjA@._V1_.jpg",
+            "id": 4,
+            "name": "Dil Hai hindustani",
+            "rating":3
+          }
+        ]
+      }
   ]
 }

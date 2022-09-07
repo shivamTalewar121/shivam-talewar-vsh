@@ -1,6 +1,7 @@
 let initialValue={
     userList: [],
-    artistList:[]
+    artistList:[],
+    albumsList:[]
 }
 
 export const UserReducer =(state= initialValue, action)=>{
@@ -11,6 +12,10 @@ export const UserReducer =(state= initialValue, action)=>{
 
         case "GET_ARTISTS" : return{
             ...state, artistList : action.payload
+        }
+
+        case "GET_ALBUMS" : return{
+            ...state, albumsList : action.payload
         }
 
         default:

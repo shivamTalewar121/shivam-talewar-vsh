@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export const addUser = (uid, name) => dispatch=>{
+export const addUser = (name) => dispatch=>{
     // return {
     //     type: "ADD_USER",
     //     payload:{
@@ -8,7 +8,7 @@ export const addUser = (uid, name) => dispatch=>{
     //         name: name,
     //     }
     // }
-    axios.post('http://localhost:3000/users', {uid:uid, name: name})
+    axios.post('http://localhost:3000/users', {name: name})
     .then(res=>{
         console.log(res.data)
         dispatch(getUsers())

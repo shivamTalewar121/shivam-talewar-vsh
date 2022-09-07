@@ -21,10 +21,10 @@ const Home = () => {
         setFormValue({ ...formValue, [name]: value })
     }
 
-    const handleClick = (event, uid, name) => {
+    const handleClick = (event, name) => {
         event.preventDefault()
-        dispatch(addUser(uid,name))
-        setFormValue({uid:'', name:''})
+        dispatch(addUser(name))
+        setFormValue({name:''})
     }
 
     useEffect(() => {

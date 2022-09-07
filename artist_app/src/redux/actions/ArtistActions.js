@@ -1,7 +1,7 @@
 import axios from "axios"
 
-export const addArtist = (uid, name) => dispatch=>{
-    axios.post('http://localhost:3000/artists', {uid:uid, name: name})
+export const addArtist = (name) => dispatch=>{
+    axios.post('http://localhost:3000/artists', {name: name})
     .then(res=>{
         console.log(res.data)
         dispatch(getArtists())
